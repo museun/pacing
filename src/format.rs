@@ -19,19 +19,7 @@ impl Roman {
             }
         }
 
-        const fn count_digits(number: i32) -> usize {
-            let (mut len, mut n) = (1, 0);
-            while len < 10 {
-                n *= 10;
-                if n > number {
-                    return len;
-                }
-                len += 1
-            }
-            len
-        }
-
-        let mut numerals = String::with_capacity(count_digits(number));
+        let mut numerals = String::new();
 
         for (k, v) in [
             (100, 1000),
