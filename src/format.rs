@@ -1,11 +1,3 @@
-pub fn float(num: f32) -> String {
-    let mut out = format!("{num:.01}");
-    if out.ends_with('0') {
-        out.truncate(out.len() - 2);
-    }
-    out
-}
-
 pub struct Roman;
 impl Roman {
     pub fn from_i32(mut number: i32) -> String {

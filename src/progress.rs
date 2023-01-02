@@ -49,14 +49,6 @@ where
     A: ToF32,
     B: ToF32,
 {
-    pub const fn new(val: A, max: B) -> Self {
-        Self {
-            pos: val,
-            max,
-            info: ProgressInfo::Complete,
-        }
-    }
-
     pub fn display(self, ui: &mut egui::Ui) -> egui::Response {
         let row_height = ui
             .fonts()

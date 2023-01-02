@@ -240,7 +240,7 @@ impl Simulation {
             .quest_book
             .quest
             .reset((50 + rng.below_low(1000)) as f32);
-        if let Some(quest) = self.player.quest_book.current_quest() {
+        if self.player.quest_book.current_quest().is_some() {
             [
                 Player::choose_item,
                 Player::choose_spell,
@@ -301,7 +301,10 @@ impl Simulation {
                     ("You are privy to a council of powerful do-gooders", 2000),
                     ("There is much to be done, you are chosen!", 1000),
                 ] {
-                    self.enqueue(Task::regular(description, Duration::from_millis(1000)), rng)
+                    self.enqueue(
+                        Task::regular(description, Duration::from_millis(duration)),
+                        rng,
+                    )
                 }
             }
             1 => {
@@ -778,16 +781,12 @@ impl Inventory {
         self.capacity = cap;
     }
 
-    pub const fn capacity(&self) -> usize {
-        self.capacity
-    }
-
     #[must_use]
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
 
-    pub fn gold(&self) -> isize {
+    pub const fn gold(&self) -> isize {
         self.gold
     }
 
@@ -816,7 +815,7 @@ impl Inventory {
     }
 
     pub fn pop(&mut self) {
-        let item = self.items.pop().expect("inventory not empty");
+        let _item = self.items.pop().expect("inventory not empty");
         self.update_bar();
     }
 
@@ -955,13 +954,6 @@ impl Player {
             task_bar: Bar::with_max(1.0),
             exp_bar: Bar::with_max(level_up_time(1).as_secs() as f32),
         }
-    }
-
-    pub fn total_queue_time(&self) -> f32 {
-        self.queue
-            .iter()
-            .map(|task| task.duration.as_secs_f32())
-            .sum()
     }
 
     pub fn set_task(&mut self, task: Task) {
