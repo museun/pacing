@@ -1,3 +1,5 @@
+#![cfg_attr(debug_assertions, allow(dead_code, unused_variables,))]
+
 mod config;
 mod format;
 mod lingo;
