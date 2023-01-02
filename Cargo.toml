@@ -1,0 +1,36 @@
+[package]
+name         = "pacing"
+version      = "0.1.0"
+authors      = ["museun"]
+license      = "0BSD"
+edition      = "2021"
+rust-version = "1.66"
+
+[dependencies]
+eframe   = { version = "0.20.1", default-features = false, features = ["persistence", "glow", "default_fonts"] }
+egui     = "0.20.1"
+fastrand = "1.8.0"
+heck     = "0.4.0"
+serde    = { version = "1.0.152", features = ["derive"] }
+# time     = { version = "0.3.17", features = ["serde-well-known", "serde"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+console_error_panic_hook = "0.1.7"
+tracing-wasm             = "0.2"
+wasm-bindgen-futures     = "0.4"
+instant                  = { version = "0.1.12", features = ["wasm-bindgen"] }
+# time                     = { version = "0.3.17", features = ["serde-well-known", "serde", "wasm-bindgen"] }
+
+[profile.release]
+opt-level = 2
+
+[profile.dev.package."*"]
+opt-level = 2
+
+[patch.crates-io]
+# eframe      = { git = "https://github.com/museun/egui", branch = "keybindings" }
+# egui        = { git = "https://github.com/museun/egui", branch = "keybindings" }
+
+egui     = { path = "c:/dev/forks/egui/crates/egui" }
+eframe   = { path = "c:/dev/forks/egui/crates/eframe" }
+fastrand = { path = "c:/dev/forks/fastrand" }
