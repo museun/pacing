@@ -1,7 +1,7 @@
 // hide the console in release builds
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use pacing::MainWindow;
+use pacing_egui::MainWindow;
 
 #[cfg(not(target_arch = "wasm32"))]
 fn main() {

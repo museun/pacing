@@ -57,8 +57,8 @@ impl Simulation {
 
     pub fn tick(&mut self, rng: &Rand) {
         let dt = self.last.elapsed().as_secs_f32() * self.time_scale;
-        self.last = Instant::now();
 
+        self.last = Instant::now();
         self.player.elapsed += dt;
 
         if self.player.task.is_none() {
@@ -133,7 +133,7 @@ impl Simulation {
             let task = self
                 .player
                 .task
-                .as_ref()
+                .take()
                 .expect("a player should always be on a task");
 
             let old = task.clone();

@@ -4,6 +4,7 @@ use egui::{
     style::Margin, Align, Button, CentralPanel, Color32, Frame, Label, Layout, RichText, Rounding,
     ScrollArea, Sense, SidePanel, Stroke, TextEdit, TopBottomPanel,
 };
+use pacing_core::{Rand, SliceExt};
 
 use crate::{
     config,
@@ -11,7 +12,6 @@ use crate::{
     lingo::{act_name, generate_name},
     mechanics::{Player, Simulation, StatsBuilder},
     progress::Progress,
-    rand::{Rand, SliceExt as _},
     view::View,
 };
 
@@ -50,6 +50,7 @@ impl MainWindow {
     const FRAME_RATE: Duration = Duration::from_millis(16);
 
     pub fn new(cc: &eframe::CreationContext) -> Self {
+        // TODO seed this
         let rng = Rand::new();
 
         if let Some(storage) = cc.storage {
