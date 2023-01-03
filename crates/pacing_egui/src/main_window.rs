@@ -5,6 +5,7 @@ use egui::{
     ScrollArea, Sense, SidePanel, Stroke, TextEdit, TopBottomPanel,
 };
 use pacing_core::{Rand, SliceExt};
+use tray_icon::TrayEvent;
 
 use crate::{
     config,
@@ -43,6 +44,7 @@ enum SelectionResult {
 pub struct MainWindow {
     rng: Rand,
     view: View,
+    is_visible: bool,
 }
 
 impl MainWindow {
@@ -58,6 +60,7 @@ impl MainWindow {
                 return Self {
                     rng,
                     view: View::CharacterSelect { players },
+                    is_visible: true,
                 };
             }
         }
@@ -70,6 +73,7 @@ impl MainWindow {
                 stats_builder,
                 players: vec![],
             },
+            is_visible: true,
         }
     }
 
@@ -614,9 +618,7 @@ impl MainWindow {
 
         CentralPanel::default().show(ctx, |ui| {
             // ui.horizontal(|ui| {
-            //     ui.add(Slider::new(&mut simulation.time_scale, 1.0..=100.0).step_by(5.0));
-
-            //     egui::global_dark_light_mode_switch(ui);
+            //     ui.add(egui::Slider::new(&mut simulation.time_scale, 1.0..=100.0).step_by(5.0));
             // });
 
             simulation.time_scale = simulation.time_scale.max(1.0);
@@ -738,6 +740,17 @@ impl MainWindow {
             View::Empty => unreachable!("invalid state"),
         }
     }
+
+    fn maybe_process_tray(&mut self, frame: &mut eframe::Frame) {
+        if let Ok(TrayEvent {
+            event: tray_icon::ClickEvent::Double,
+            ..
+        }) = tray_icon::tray_event_receiver().try_recv()
+        {
+            self.is_visible = !self.is_visible;
+            frame.set_visible(self.is_visible)
+        }
+    }
 }
 
 impl eframe::App for MainWindow {
@@ -749,6 +762,7 @@ impl eframe::App for MainWindow {
         // }
         egui::gui_zoom::zoom_with_keyboard_shortcuts(ctx, frame.info().native_pixels_per_point);
 
+        self.maybe_process_tray(frame);
         Self::display_main_view(&mut self.view, &self.rng, ctx)
     }
 

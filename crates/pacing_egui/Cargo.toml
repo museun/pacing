@@ -3,9 +3,9 @@ name = "pacing_egui"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-eframe = { version = "0.20.1", features = ["persistence"] }
+eframe = { version = "0.20.1", default-features = false, features = ["glow", "persistence"] }
 egui = "0.20.1"
+image = { version = "0.24.5", default-features = false, features = ["png"] }
 pacing_core = { version = "0.1.0", path = "../pacing_core" }
+tray-icon = "0.2.0"
