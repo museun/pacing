@@ -1,0 +1,13 @@
+[package]
+name = "pacing_tui"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cursive = { version = "0.20.0", default-features = false, features = ["crossterm-backend"] }
+cursive-aligned-view = "0.6.0"
+log = { version = "0.4.17", features = ["std"] }
+pacing_core = { version = "0.1.0", path = "../pacing_core" }
+time = { version = "0.3.17", features = ["formatting"] }

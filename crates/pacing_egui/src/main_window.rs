@@ -128,37 +128,39 @@ impl MainWindow {
         });
         ui.separator();
 
-        ScrollArea::vertical().show(ui, |ui| {
-            ui.heading("Details");
-            ui.horizontal(|ui| {
-                ui.monospace("Level");
-                ui.label(player.level.to_string());
-            });
-
-            ui.horizontal(|ui| {
-                ui.monospace("Class");
-                ui.label(&*player.class.name);
-            });
-
-            ui.horizontal(|ui| {
-                ui.monospace("Race");
-                ui.label(&*player.race.name);
-            });
-
-            ui.separator();
-            ui.heading("Stats");
-
-            for (k, v) in player.stats.iter() {
-                if let config::Stat::HpMax = k {
-                    ui.separator();
-                }
+        ScrollArea::vertical()
+            .id_source("detail_list")
+            .show(ui, |ui| {
+                ui.heading("Details");
+                ui.horizontal(|ui| {
+                    ui.monospace("Level");
+                    ui.label(player.level.to_string());
+                });
 
                 ui.horizontal(|ui| {
-                    ui.monospace(k.as_str());
-                    ui.monospace(v.to_string());
+                    ui.monospace("Class");
+                    ui.label(&*player.class.name);
                 });
+
+                ui.horizontal(|ui| {
+                    ui.monospace("Race");
+                    ui.label(&*player.race.name);
+                });
+            });
+
+        ui.separator();
+        ui.heading("Stats");
+
+        for (k, v) in player.stats.iter() {
+            if let config::Stat::HpMax = k {
+                ui.separator();
             }
-        });
+
+            ui.horizontal(|ui| {
+                ui.monospace(k.as_str());
+                ui.monospace(v.to_string());
+            });
+        }
 
         out
     }
@@ -399,6 +401,7 @@ impl MainWindow {
                         });
                         ScrollArea::vertical()
                             .stick_to_bottom(true)
+                            .min_scrolled_height(32.0)
                             .id_source("stat_list")
                             .show(ui, |ui| {
                                 for (stat, val) in simulation.player.stats.iter() {
@@ -427,11 +430,12 @@ impl MainWindow {
             });
         }
 
-        fn display_spell_bool(simulation: &mut Simulation, ui: &mut egui::Ui) {
+        fn display_spell_book(simulation: &mut Simulation, ui: &mut egui::Ui) {
             Frame::none().stroke(stroke(ui)).show(ui, |ui| {
                 ui.vertical_centered(|ui| {
                     ui.label(RichText::new("Spell Book").strong());
                 });
+                // ui.separator();
 
                 make_frame(ui, |ui| {
                     ui.horizontal(|ui| {
@@ -442,6 +446,7 @@ impl MainWindow {
                     });
                     ScrollArea::vertical()
                         .stick_to_bottom(true)
+                        .min_scrolled_height(32.0)
                         .id_source("spell_list")
                         .show(ui, |ui| {
                             for (spell, level) in simulation.player.spell_book.iter() {
@@ -453,7 +458,7 @@ impl MainWindow {
                                 });
                             }
 
-                            ui.allocate_space(ui.available_size_before_wrap());
+                            // ui.allocate_space(ui.available_size_before_wrap());
                         });
                 });
             });
@@ -537,7 +542,7 @@ impl MainWindow {
                                 });
                             }
 
-                            ui.allocate_space(ui.available_size_before_wrap());
+                            // ui.allocate_space(ui.available_size_before_wrap());
                         });
                 });
             });
@@ -608,8 +613,8 @@ impl MainWindow {
                                 if let Some(quest) = simulation.player.quest_book.current_quest() {
                                     ui.checkbox(&mut false, quest);
                                 }
-                                ui.allocate_space(ui.available_size_before_wrap());
                             });
+                        ui.allocate_space(ui.available_size_before_wrap());
                     });
             });
         }
@@ -637,7 +642,7 @@ impl MainWindow {
                             crate::progress::ProgressInfo::Percent,
                         )
                         .display(ui);
-                        ui.allocate_space(ui.available_size_before_wrap());
+                        // ui.allocate_space(ui.available_size_before_wrap());
                     });
                 });
 
@@ -647,7 +652,7 @@ impl MainWindow {
                 .show_separator_line(false)
                 .show_inside(ui, |ui| {
                     display_character_sheet(simulation, ui);
-                    display_spell_bool(simulation, ui);
+                    display_spell_book(simulation, ui);
                 });
 
             SidePanel::right("right_panel")
@@ -755,11 +760,11 @@ impl MainWindow {
 
 impl eframe::App for MainWindow {
     fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
-        // const DEBUG_KEY: egui::KeyboardShortcut =
-        //     egui::KeyboardShortcut::new(egui::Modifiers::NONE, egui::Key::F12);
-        // if ctx.input_mut().consume_shortcut(&DEBUG_KEY) {
-        //     ctx.set_debug_on_hover(!ctx.debug_on_hover())
-        // }
+        const DEBUG_KEY: egui::KeyboardShortcut =
+            egui::KeyboardShortcut::new(egui::Modifiers::NONE, egui::Key::F12);
+        if ctx.input_mut().consume_shortcut(&DEBUG_KEY) {
+            ctx.set_debug_on_hover(!ctx.debug_on_hover())
+        }
         egui::gui_zoom::zoom_with_keyboard_shortcuts(ctx, frame.info().native_pixels_per_point);
 
         self.maybe_process_tray(frame);
