@@ -116,9 +116,9 @@ dependencies = [
 
 [[package]]
 name = "atomic_refcell"
-version = "0.1.8"
+version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "73b5e5f48b927f04e952dedc932f31995a65a0bf65ec971c74436e51bf6e970d"
+checksum = "857253367827bd9d0fd973f0ef15506a96e79e41b0ad7aa691203a4e3214f6c8"
 
 [[package]]
 name = "autocfg"
@@ -669,6 +669,7 @@ dependencies = [
 [[package]]
 name = "ecolor"
 version = "0.20.0"
+source = "git+https://github.com/emilk/egui?rev=34f587d1e1cc69146f7a02f20903e4f573030ffd#34f587d1e1cc69146f7a02f20903e4f573030ffd"
 dependencies = [
  "bytemuck",
  "serde",
@@ -677,6 +678,7 @@ dependencies = [
 [[package]]
 name = "eframe"
 version = "0.20.1"
+source = "git+https://github.com/emilk/egui?rev=34f587d1e1cc69146f7a02f20903e4f573030ffd#34f587d1e1cc69146f7a02f20903e4f573030ffd"
 dependencies = [
  "bytemuck",
  "directories-next",
@@ -701,6 +703,7 @@ dependencies = [
 [[package]]
 name = "egui"
 version = "0.20.1"
+source = "git+https://github.com/emilk/egui?rev=34f587d1e1cc69146f7a02f20903e4f573030ffd#34f587d1e1cc69146f7a02f20903e4f573030ffd"
 dependencies = [
  "accesskit",
  "ahash",
@@ -714,6 +717,7 @@ dependencies = [
 [[package]]
 name = "egui-winit"
 version = "0.20.1"
+source = "git+https://github.com/emilk/egui?rev=34f587d1e1cc69146f7a02f20903e4f573030ffd#34f587d1e1cc69146f7a02f20903e4f573030ffd"
 dependencies = [
  "arboard",
  "egui",
@@ -728,6 +732,7 @@ dependencies = [
 [[package]]
 name = "egui_glow"
 version = "0.20.1"
+source = "git+https://github.com/emilk/egui?rev=34f587d1e1cc69146f7a02f20903e4f573030ffd#34f587d1e1cc69146f7a02f20903e4f573030ffd"
 dependencies = [
  "bytemuck",
  "egui",
@@ -741,6 +746,7 @@ dependencies = [
 [[package]]
 name = "emath"
 version = "0.20.0"
+source = "git+https://github.com/emilk/egui?rev=34f587d1e1cc69146f7a02f20903e4f573030ffd#34f587d1e1cc69146f7a02f20903e4f573030ffd"
 dependencies = [
  "bytemuck",
  "serde",
@@ -791,6 +797,7 @@ dependencies = [
 [[package]]
 name = "epaint"
 version = "0.20.0"
+source = "git+https://github.com/emilk/egui?rev=34f587d1e1cc69146f7a02f20903e4f573030ffd#34f587d1e1cc69146f7a02f20903e4f573030ffd"
 dependencies = [
  "ab_glyph",
  "ahash",
@@ -1534,9 +1541,9 @@ dependencies = [
 
 [[package]]
 name = "muda"
-version = "0.2.0"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e1f7c00cad6177c2d7af0721a4a0e73bc29c284806b1fce5d99a1ad7598d9de1"
+checksum = "c3c25f73522be5f75942bdfe6880b7ce16903467e774f0904d398d2e4b7f49b2"
 dependencies = [
  "cocoa",
  "crossbeam-channel",
@@ -2379,9 +2386,9 @@ dependencies = [
 
 [[package]]
 name = "tray-icon"
-version = "0.2.0"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3d3a2dea806f2445e829c755b1248ad928b872566842afec1bca817b289ed238"
+checksum = "0ae6ec5d46e3d2ef93a4bb28954cf79411491e7db51ca96db00849c526703521"
 dependencies = [
  "cocoa",
  "core-graphics",

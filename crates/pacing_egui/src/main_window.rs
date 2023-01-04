@@ -750,7 +750,7 @@ impl MainWindow {
         if let Ok(TrayEvent {
             event: tray_icon::ClickEvent::Double,
             ..
-        }) = tray_icon::tray_event_receiver().try_recv()
+        }) = tray_icon::TrayEvent::receiver().try_recv()
         {
             self.is_visible = !self.is_visible;
             frame.set_visible(self.is_visible)

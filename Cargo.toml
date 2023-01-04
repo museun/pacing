@@ -11,10 +11,5 @@ opt-level = 2
 opt-level = 2
 
 [patch.crates-io]
-egui     = { path = "c:/dev/forks/egui/crates/egui" }
-eframe   = { path = "c:/dev/forks/egui/crates/eframe" }
-# fastrand = { path = "c:/dev/forks/fastrand" }
-
-# [patch.crates-io]
-# eframe = { git = "https://github.com/emilk/egui", rev = "34f587d1e1cc69146f7a02f20903e4f573030ffd" }
-# egui = { git = "https://github.com/emilk/egui", rev = "34f587d1e1cc69146f7a02f20903e4f573030ffd" }
+eframe = { git = "https://github.com/emilk/egui", rev = "34f587d1e1cc69146f7a02f20903e4f573030ffd" }
+egui = { git = "https://github.com/emilk/egui", rev = "34f587d1e1cc69146f7a02f20903e4f573030ffd" }
